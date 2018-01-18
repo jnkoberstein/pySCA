@@ -45,13 +45,13 @@ from optparse import OptionParser
 
 # (this directory should contain the file 'pfamseq.txt' from
 # ftp://ftp.sanger.ac.uk/pub/databases/Pfam/current_release/database_files/
-path2pfamseq = '~/Documents/Packages/pfamseq.txt'
+path2pfamseq = 'pfamseq.txt'
 
 # the location of your PDB structures
 path2structures = 'Inputs/'
 
 # paths to pymol and needle (EMBOSS) applictaions
-path2pymol = '/Applications/MacPyMOL.app/Contents/MacOS/MacPyMOL'
+path2pymol = '//home/jnk/software/pymol/bin/pymol'
 path2needle = '/usr/local/bin/'
 
 # Also assumes that a folder named 'Outputs' is in the path
@@ -995,7 +995,7 @@ def icList(Vpica, kpos, Csca, p_cut=0.95):
         iqr = scoreatpercentile(Vpica[:,k],75) - scoreatpercentile(Vpica[:,k],25)
         binwidth=2*iqr*(len(Vpica[:,k])**(-0.33))
         nbins=round((max(Vpica[:,k])-min(Vpica[:,k]))/binwidth)
-        h_params = np.histogram(Vpica[:,k], nbins)
+        h_params = np.histogram(Vpica[:,k], int(nbins))
         x_dist = np.linspace(min(h_params[1]), max(h_params[1]), num=100)
         area_hist=Npos*(h_params[1][2]-h_params[1][1]);
         scaled_pdf.append(area_hist*(t.pdf(x_dist,pd[0],pd[1],pd[2])))
