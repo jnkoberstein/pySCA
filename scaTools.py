@@ -994,8 +994,8 @@ def icList(Vpica, kpos, Csca, p_cut=0.95):
         all_fits.append(pd)
         iqr = scoreatpercentile(Vpica[:,k],75) - scoreatpercentile(Vpica[:,k],25)
         binwidth=2*iqr*(len(Vpica[:,k])**(-0.33))
-        nbins=round((max(Vpica[:,k])-min(Vpica[:,k]))/binwidth)
-        h_params = np.histogram(Vpica[:,k], int(nbins))
+        nbins=int(round((max(Vpica[:,k])-min(Vpica[:,k]))/binwidth))
+        h_params = np.histogram(Vpica[:,k], nbins)
         x_dist = np.linspace(min(h_params[1]), max(h_params[1]), num=100)
         area_hist=Npos*(h_params[1][2]-h_params[1][1]);
         scaled_pdf.append(area_hist*(t.pdf(x_dist,pd[0],pd[1],pd[2])))
